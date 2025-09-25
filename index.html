@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>McDee - Your Trusted Marketplace & Services Platform</title>
+    <meta name="description" content="McDee is Nigeria's premier multifunctional marketplace offering ride-hailing, food delivery, e-commerce, service apartments, auto maintenance, and general services with secure P2P transactions." />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      (function(d,t) {
+        var BASE_URL="https://app.chatwoot.com";
+        var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=BASE_URL+"/packs/js/sdk.js";
+        g.async = true;
+        s.parentNode.insertBefore(g,s);
+        g.onload=function(){
+          window.chatwootSDK.run({
+            websiteToken: 'T8aJeeUjLo9nFBXbC7VmC3cT',
+            baseUrl: BASE_URL
+          })
+        }
+      })(document,"script");
+    </script>
+
+  </body>
+</html>
