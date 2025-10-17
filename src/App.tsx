@@ -15,6 +15,14 @@ import RefundPolicy from './pages/legal/RefundPolicy';
 import TermsOfService from './pages/legal/TermsConditions';
 import PrivacyPolicy from './pages/legal/PrivacyPolicy';
 import ContactPage from './pages/ContactPage';
+import ProductDetail from "./pages/ProductDetail"
+import CartPage from "./pages/Cart"
+
+// Import food pages
+import FoodVendorMenu from "./pages/FoodVendorMenu"
+import FoodCart from "./pages/FoodCart"
+import FoodCheckout from "./pages/FoodCheckout"
+import MyFoodOrders from "./pages/dashboard/user/MyFoodOrders"
 
 // Import existing dashboard components
 import UserDashboard from "./pages/dashboard/user"
@@ -26,13 +34,20 @@ import ServicePricings from "./pages/dashboard/service-vendor/ServicePricings"
 import ServiceOrders from "./pages/dashboard/service-vendor/ServiceOrders"
 import ApartmentDashboard from "./pages/dashboard/apartment"
 import FoodVendorDashboard from "./pages/dashboard/food-vendor"
+import FoodVendorMenuManagement from "./pages/dashboard/food-vendor/MenuManagement"
+import FoodVendorOrders from "./pages/dashboard/food-vendor/Orders"
 import GeneralVendorDashboard from "./pages/dashboard/vendor"
 import ApartmentListingForm from "./pages/dashboard/vendor/ApartmentListing"
+import VendApartmentBooking from "./pages/dashboard/apartment/VendApartmentBookings"
 import PrivateRouteVendor from "./components/vendor/PrivateRouteVendor"
+import PrivateRouteUser from "./components/user/PrivateRouteUser"
 import ListedPropertiesPage from "./pages/dashboard/apartment/ListedPropertiesPage"
+
 import MyBookings from "./pages/dashboard/user/MyBookings"
 import MyServiceOrders from "./pages/dashboard/user/MyServiceOrders"
-
+import MyOrders from "./pages/dashboard/user/MyOrders"
+import VendorOrders from "./pages/dashboard/product-vendor/Orders"
+import Checkout from "./pages/Checkout"
 
 // Import profile pages
 import UserProfile from "./pages/dashboard/user/profile"
@@ -45,6 +60,7 @@ import KYCReview from "./pages/Admin/KYCReview"
 import VendorManagement from "./pages/Admin/Vendors"
 import AdminSettings from "./pages/Admin/Settings"
 import BookingManagement from "./pages/dashboard/admin/BookingManagement"
+import OrderManagement from "./pages/dashboard/admin/OrderManagement"
 import PrivateRouteAdmin from "./components/admin/PrivateRouteAdmin"
 
 import "./App.css"
@@ -60,6 +76,16 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/vendor-dashboard" element={<VendorDashboard />} />
           <Route path="/food-delivery" element={<FoodDelivery />} />
+          <Route path="/food-vendor/:vendorId" element={<FoodVendorMenu />} />
+          <Route path="/food-cart" element={<FoodCart />} />
+          <Route
+            path="/food-checkout"
+            element={
+              <PrivateRouteUser>
+                <FoodCheckout />
+              </PrivateRouteUser>
+            }
+          />
           <Route path="/ride-hailing" element={<RideHailing />} />
           <Route path="/service-apartments" element={<ServiceApartments />} />
           <Route path="/ecommerce" element={<ECommerce />} />
@@ -74,7 +100,23 @@ function App() {
           {/* Dashboard Routes */}
           <Route path="/dashboard/user" element={<UserDashboard />} />
           <Route path="/dashboard/user/bookings" element={<MyBookings />} />
-          <Route path="/dashboard/user/my-service-orders" element={<MyServiceOrders />}/> 
+          <Route path="/dashboard/user/my-service-orders" element={<MyServiceOrders />} />
+          <Route
+            path="/dashboard/user/orders"
+            element={
+              <PrivateRouteUser>
+                <MyOrders />
+              </PrivateRouteUser>
+            }
+          />
+          <Route
+            path="/dashboard/user/food-orders"
+            element={
+              <PrivateRouteUser>
+                <MyFoodOrders />
+              </PrivateRouteUser>
+            }
+          />
           <Route path="/dashboard/mechanic" element={<MechanicDashboard />} />
           <Route path="/dashboard/rider" element={<RiderDashboard />} />
           <Route path="/dashboard/product-vendor" element={<ProductVendorDashboard />} />
@@ -93,6 +135,19 @@ function App() {
           <Route path="/dashboard/food-vendor/profile" element={<UserProfile />} />
           <Route path="/dashboard/vendor/profile" element={<UserProfile />} />
 
+          {/* E-Commerce Routes */}
+          <Route path="/ecommerce" element={<ECommerce />} />
+          <Route path="/ecommerce/product/:id" element={<ProductDetail />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route
+            path="/checkout"
+            element={
+              <PrivateRouteUser>
+                <Checkout />
+              </PrivateRouteUser>
+            }
+          />
+
           {/* Compliance Routes */}
           <Route path="/dashboard/mechanic/compliance" element={<VendorCompliance />} />
           <Route path="/dashboard/rider/compliance" element={<VendorCompliance />} />
@@ -108,6 +163,14 @@ function App() {
             element={
               <PrivateRouteVendor>
                 <ApartmentListingForm />
+              </PrivateRouteVendor>
+            }
+          />
+                    <Route
+            path="/dashboard/apartment/bookings"
+            element={
+              <PrivateRouteVendor>
+                <VendApartmentBooking />
               </PrivateRouteVendor>
             }
           />
@@ -132,6 +195,42 @@ function App() {
             element={
               <PrivateRouteVendor>
                 <ServiceOrders />
+              </PrivateRouteVendor>
+            }
+          />
+
+          {/* Product Vendor Routes */}
+          <Route
+            path="/dashboard/product-vendor/products"
+            element={
+              <PrivateRouteVendor>
+                <ProductVendorDashboard />
+              </PrivateRouteVendor>
+            }
+          />
+          <Route
+            path="/dashboard/product-vendor/orders"
+            element={
+              <PrivateRouteVendor>
+                <VendorOrders />
+              </PrivateRouteVendor>
+            }
+          />
+
+          {/* Food Vendor Routes */}
+          <Route
+            path="/dashboard/food-vendor/menu"
+            element={
+              <PrivateRouteVendor>
+                <FoodVendorMenuManagement />
+              </PrivateRouteVendor>
+            }
+          />
+          <Route
+            path="/dashboard/food-vendor/orders"
+            element={
+              <PrivateRouteVendor>
+                <FoodVendorOrders />
               </PrivateRouteVendor>
             }
           />
@@ -167,6 +266,14 @@ function App() {
             element={
               <PrivateRouteAdmin>
                 <BookingManagement />
+              </PrivateRouteAdmin>
+            }
+          />
+          <Route
+            path="/admin/orders"
+            element={
+              <PrivateRouteAdmin>
+                <OrderManagement />
               </PrivateRouteAdmin>
             }
           />
